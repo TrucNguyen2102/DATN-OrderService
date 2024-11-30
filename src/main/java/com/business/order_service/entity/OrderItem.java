@@ -13,8 +13,8 @@ public class OrderItem {
     @Column(name = "quantity")
     private Integer quantity;
 
-    @Column(name = "price")
-    private double price;
+    @Column(name = "total_price_item")
+    private Double totalPriceItem;
 
     @Column(name = "menu_id")
     private Integer menuId; //khóa ngoại của menu từ menu-service
@@ -22,13 +22,20 @@ public class OrderItem {
     @Column(name = "invoice_id")
     private Integer invoiceId; //khóa ngoại của invoice từ invoice-service
 
-    private OrderItem() {
+    public OrderItem() {
 
     }
-    public OrderItem(Integer id, Integer quantity, double price, Integer menuId, Integer invoiceId) {
+    public OrderItem(Integer id, Integer quantity, Double totalPriceItem, Integer menuId, Integer invoiceId) {
         this.id = id;
         this.quantity = quantity;
-        this.price = price;
+        this.totalPriceItem = totalPriceItem;
+        this.menuId = menuId;
+        this.invoiceId = invoiceId;
+    }
+
+    public OrderItem(Integer quantity, Double totalPriceItem, Integer menuId, Integer invoiceId) {
+        this.quantity = quantity;
+        this.totalPriceItem = totalPriceItem;
         this.menuId = menuId;
         this.invoiceId = invoiceId;
     }
@@ -49,12 +56,12 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public double getPrice() {
-        return price;
+    public Double getTotalPriceItem() {
+        return totalPriceItem;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setTotalPriceItem(Double totalPriceItem) {
+        this.totalPriceItem = totalPriceItem;
     }
 
     public Integer getMenuId() {
