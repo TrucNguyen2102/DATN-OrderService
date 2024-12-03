@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -32,6 +33,16 @@ public class OrderItemController {
 //                    .body("Có lỗi xảy ra khi lưu đơn hàng: " + e.getMessage());
 //        }
 //    }
+
+    @GetMapping("/endpoints")
+    public List<Map<String, String>> getEndpoints() {
+        return List.of(
+                Map.of("service", "order-service", "method", "GET", "url", "/api/orders/all"),
+                Map.of("service", "order-service", "method", "POST", "url", "/api/orders/add"),
+                Map.of("service", "order-service", "method", "GET", "url", "api/orders/byInvoiceId/{id}")
+
+        );
+    }
 
     @PostMapping("/add")
     public ResponseEntity<?> addOrderItem(@RequestBody OrderItemRequest request) {
