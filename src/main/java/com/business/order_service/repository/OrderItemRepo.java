@@ -12,4 +12,6 @@ public interface OrderItemRepo extends JpaRepository<OrderItem, Integer> {
 //    Optional<OrderItem> findById(Integer id);
 //    List<OrderItem> findByOrderId(Integer orderId);
     List<OrderItem> findByInvoiceId(Integer invoiceId);
+
+    boolean existsByMenuId(Integer tableId);
 }

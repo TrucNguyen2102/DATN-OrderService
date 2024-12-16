@@ -39,7 +39,8 @@ public class OrderItemController {
         return List.of(
                 Map.of("service", "order-service", "method", "GET", "url", "/api/orders/all"),
                 Map.of("service", "order-service", "method", "POST", "url", "/api/orders/add"),
-                Map.of("service", "order-service", "method", "GET", "url", "api/orders/byInvoiceId/{id}")
+                Map.of("service", "order-service", "method", "GET", "url", "api/orders/byInvoiceId/{id}"),
+                Map.of("service", "order-service", "method", "GET", "url", "api/orders/check-menu-used/{menuId}")
 
         );
     }
@@ -89,6 +90,20 @@ public class OrderItemController {
            return ResponseEntity.badRequest().build();
         }
 
+    }
+
+    @GetMapping("/check-menu-used/{menuId}")
+    public ResponseEntity<Boolean> isMenuUsedInOrderItem(@PathVariable Integer menuId) {
+        try {
+            // Kiểm tra xem có OrderItem nào chứa menuId này không
+            boolean isUsed = orderItemRepo.existsByMenuId(menuId);
+
+            // Trả về kết quả
+            return ResponseEntity.ok(isUsed);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
 }

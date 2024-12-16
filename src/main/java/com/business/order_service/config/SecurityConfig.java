@@ -23,6 +23,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/orders/add").permitAll()
                         .requestMatchers("/api/orders/all").permitAll()
                         .requestMatchers("/api/orders/byInvoiceId/{invoiceId}").permitAll()
+                        .requestMatchers("/api/orders/check-menu-used/{menuId}").permitAll()
 
 
                         .anyRequest().authenticated()
